@@ -1,0 +1,10 @@
+
+<input (keypress)="onKeyPress($event)" (keyup)="onKey($event)" type="text" >
+<ul>
+  <li *ngFor="let elem of resultList">
+    <div class="card">
+      <h3>{{ elem.title }}</h3>
+      <small>Words: {{ elem.wordcount }} - <a href='{{elem.link}}' target="_blank">open</a></small>       
+    </div>
+  </li>
+</ul>
