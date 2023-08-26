@@ -95,7 +95,6 @@
       }
     }
   },
-  "defaultProject": "wiki-search",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
