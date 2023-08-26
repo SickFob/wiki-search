@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Jsonp, Http } from '@angular/http';
-import { Subject } from 'rxjs/Subject';
+import { HttpClient } from '@angular/common/http';
+
 import 'rxjs/Rx';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class WikiService {
 
   private wikiUrl: string;
   public wikiResult = {};
-  constructor(private jsonp: Jsonp, private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * 
@@ -23,7 +23,7 @@ export class WikiService {
    *  perform the async api request
    */
   getWiki() {
-    return this.jsonp.request(this.wikiUrl);
+    return this.http.jsonp(this.wikiUrl, '');
   }
 
 }

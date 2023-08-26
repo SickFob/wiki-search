@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -15,8 +16,8 @@ import { WikiService } from 'app/services/wiki/wiki.service';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    JsonpModule
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [
     WikiService

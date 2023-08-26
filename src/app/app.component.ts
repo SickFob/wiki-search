@@ -49,9 +49,9 @@ export class AppComponent {
 
   getResults(param) {
     this.wikiService.setWikiUrl(param); // change request param
-    this.wikiService.getWiki().map(data => {
-      this.resultList = data['_body'].query.search; // assign data
+    this.wikiService.getWiki().subscribe(data => {
+      this.resultList = data['query'].search; // assign data
       this.setLink(); // add link for every elemnt
-    }).subscribe(); // make the request
+    });
   }
 }
