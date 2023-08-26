@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 // Service
 import { WikiService } from 'app/services/wiki/wiki.service';
+import { WikiResult } from './wiki-result';
 
 @Component({
   selector: 'app-root',
@@ -10,33 +11,32 @@ import { WikiService } from 'app/services/wiki/wiki.service';
 })
 export class AppComponent {
 
-  public resultList; // where I save results
+  public resultList: WikiResult[]; // where I save results
   private searchParam: string[] = []; // store every char typed
 
-  
   constructor(private wikiService: WikiService) {}
 
   /**
    * 
-   * @param e event obj for character keys
+   * @param e KeyboardEvent obj for character keys
    */
-  onKeyPress(e) {
+  onKeyPress(e: KeyboardEvent) {
     this.searchParam.push(e.key); // add char to the array
     this.getResults(this.searchParam.join(''));
   }
 
   /**
    * 
-   * @param e event obj, necessary for noncharacter keys
+   * @param e KeyboardEvent obj, necessary for backspace command
    */
-  onKey(e) {
-    if(e.keyCode == 8) 
+  onKey(e: KeyboardEvent) {
+    if(e.code === "Backspace") 
       this.searchParam.pop();
       this.getResults(this.searchParam.join(''));
   }
 
   /**
-   * creation of the link
+   * Creation of the link
    */
   setLink() {
     for(let elem of this.resultList) {
@@ -45,13 +45,20 @@ export class AppComponent {
     }
   }
 
-
-
-  getResults(param) {
-    this.wikiService.setWikiUrl(param); // change request param
-    this.wikiService.getWiki().subscribe(data => {
-      this.resultList = data['query'].search; // assign data
-      this.setLink(); // add link for every elemnt
-    });
+  /**
+   * Retrieves data from wikipedia by search term
+   * 
+   * @param param string to search
+   */
+  getResults(param: string) {
+    if(param === '' && this.resultList.length > 0) {
+      this.resultList = [];
+    } else {
+      this.wikiService.setWikiUrl(param); // change request param
+      this.wikiService.getWiki().subscribe(data => {
+        this.resultList = data['query'].search; // assign data
+        this.setLink(); // add link for every elemnt
+      });
+    }
   }
 }

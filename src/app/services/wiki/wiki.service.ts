@@ -12,11 +12,11 @@ export class WikiService {
 
   /**
    * 
-   * @param srsearch settin param in url
+   * @param searchText settin param in url
    */
-  setWikiUrl(srsearch) {
-    srsearch = srsearch.replace(/[\s]/g, '_');
-    this.wikiUrl =`https://en.wikipedia.org/w/api.php?action=query&callback=JSONP_CALLBACK&format=json&generator=links&list=search&srsearch=${srsearch}&utf8=1`;
+  setWikiUrl(searchText: string) {
+    searchText = searchText.replace(/[\s]/g, '_');
+    this.wikiUrl =`https://en.wikipedia.org/w/api.php?action=query&callback=JSONP_CALLBACK&format=json&generator=links&list=search&srsearch=${searchText}&utf8=1`;
   }
 
   /**
